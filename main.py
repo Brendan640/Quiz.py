@@ -18,7 +18,7 @@ class QuestionAnswer:
 		return random.shuffle([self.correct_answer, self.incorrect_answer_1, self.incorrect_answer_2, self.incorrect_answer_3])
 
 	def check_answer(self, answer):
-		if(answer == correct_answer):
+		if(answer == self.correct_answer):
 			return True
 		else:
 			return False
