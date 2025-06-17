@@ -1,4 +1,4 @@
-import pygame, random
+import pygame, random, sys
 
 # QuestionAnswer
 # used for containing a question and its answers
@@ -23,16 +23,65 @@ class QuestionAnswer:
 		else:
 			return False
 
+
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 running = True
 
-while running:
-	for event in pygame.event.get(): # get all events
-		if event.type == pygame.QUIT: # stop running if event is quit
-			running = False
+start_img = pygame.image.load('img/start_button.png').convert_alpha()
+exit_img = pygame.image.load('img/quit_button.png').convert_alpha()
 
-	screen.fill("blue") # set bg to blue
-	pygame.display.flip() # render
+
+
+class Button():
+    def __init__(self, x, y, image, scale):
+        width = image.get_width()
+        height = image.get_height()
+        self.image = pygame.transform.scale(image, (int(width * scale), int(height* scale)))
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+        self.clicked = False
+
+    def draw(self):
+        action = False
+
+
+
+        pos = pygame.mouse.get_pos()
+
+        if self.rect.collidepoint(pos):
+            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+                self.clicked = True
+                action = True
+
+        if pygame.mouse.get_pressed()[0] == 0:
+            self.clicked = False
+
+        screen.blit(self.image, (self.rect.x, self.rect.y))
+
+        return action
+
+
+start_button = Button(500, 200, start_img, 0.8)
+exit_button = Button(500, 300, exit_img, 0.8)
+
+running = True
+while running:
+
+    screen.fill('#F2E3CC')
+
+    if start_button.draw():
+        print('Start')
+       
+        
+    if exit_button.draw():
+        running = False
+
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    pygame.display.update()
 
 pygame.quit()
