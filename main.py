@@ -13,7 +13,7 @@ class QuestionAnswer:
 		self.incorrect_answer_1 = IncorrectAnswer1
 		self.incorrect_answer_2 = IncorrectAnswer2
 		self.incorrect_answer_3 = IncorrectAnswer3
-	
+
 	def shuffled_answers(self):
 		return random.shuffle([self.correct_answer, self.incorrect_answer_1, self.incorrect_answer_2, self.incorrect_answer_3])
 
@@ -23,65 +23,55 @@ class QuestionAnswer:
 		else:
 			return False
 
-
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 running = True
 
-start_img = pygame.image.load('img/start_button.png').convert_alpha()
-exit_img = pygame.image.load('img/quit_button.png').convert_alpha()
-
-
-
 class Button():
-    def __init__(self, x, y, image, scale):
-        width = image.get_width()
-        height = image.get_height()
-        self.image = pygame.transform.scale(image, (int(width * scale), int(height* scale)))
-        self.rect = self.image.get_rect()
-        self.rect.topleft = (x, y)
-        self.clicked = False
+	def __init__(self, x, y, size, text, color_text, color_bg):
+		self.font = pygame.font.Font('freesansbold.ttf', size)
+		self.text = self.font.render(text, True, color_text, color_bg)
+		self.rect = self.text.get_rect()
+		self.rect.midtop = (x, y)
+		self.clicked = False
 
-    def draw(self):
-        action = False
+	def draw(self):
+		action = False
 
+		pos = pygame.mouse.get_pos()
 
+		if self.rect.collidepoint(pos):
+			if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+				self.clicked = True
+				action = True
 
-        pos = pygame.mouse.get_pos()
+		if pygame.mouse.get_pressed()[0] == 0:
+			self.clicked = False
 
-        if self.rect.collidepoint(pos):
-            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
-                self.clicked = True
-                action = True
+		screen.blit(self.text, self.rect)
 
-        if pygame.mouse.get_pressed()[0] == 0:
-            self.clicked = False
+		return action
 
-        screen.blit(self.image, (self.rect.x, self.rect.y))
-
-        return action
-
-
-start_button = Button(500, 200, start_img, 0.8)
-exit_button = Button(500, 300, exit_img, 0.8)
+start_button = Button(640, 300, 50, 'start', (255,255,255), (0,0,0))
+exit_button = Button(640, 400, 50, 'exit', (255,255,255), (0,0,0))
 
 running = True
 while running:
 
-    screen.fill('#F2E3CC')
+	screen.fill('#F2E3CC')
 
-    if start_button.draw():
-        print('Start')
-       
-        
-    if exit_button.draw():
-        running = False
+	if start_button.draw():
+		print('Start')
 
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+	if exit_button.draw():
+		running = False
 
-    pygame.display.update()
+
+	for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+			running = False
+
+	pygame.display.update()
 
 pygame.quit()
