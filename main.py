@@ -14,12 +14,14 @@ class QuestionAnswer:
 	def __init__(self, Question, CorrectAnswer, IncorrectAnswer1, IncorrectAnswer2, IncorrectAnswer3):
 		self.question = Question
 		self.correct_answer = CorrectAnswer
-		self.incorrect_answer_1 = IncorrectAnswer1
-		self.incorrect_answer_2 = IncorrectAnswer2
-		self.incorrect_answer_3 = IncorrectAnswer3
+		self.incorrect_answer1 = IncorrectAnswer1
+		self.incorrect_answer2 = IncorrectAnswer2
+		self.incorrect_answer3 = IncorrectAnswer3
+		self.array = [self.correct_answer, self.incorrect_answer1, self.incorrect_answer2, self.incorrect_answer3]
+		random.shuffle(self.array)
 
 	def shuffled_answers(self):
-		return random.shuffle([self.correct_answer, self.incorrect_answer_1, self.incorrect_answer_2, self.incorrect_answer_3])
+		return ([self.question] + self.array)
 
 	def check_answer(self, answer):
 		if(answer == self.correct_answer):
@@ -70,17 +72,42 @@ class Button():
 start_button = Button(640, 300, 100, 50, 50, 'start', (255,255,255), (0,0,0))
 exit_button =  Button(640, 500, 100, 50, 50, 'exit', (255,255,255), (0,0,0))
 
-while running:
+question1 = QuestionAnswer('\nWhen was the internet\nfirst created?', '\n\n1960s', '\n\n1950s', '\n\n1970s', '\n\n1980s')
 
+question = 0
+
+question_arr = [question1.shuffled_answers()]
+
+section = "start"
+
+while running:
+	
 	screen.fill('#F2E3CC')
 
-	if start_button.draw():
-		print('Start')
+	if(section == "start"):
 
 
-	if exit_button.draw():
-		running = False
+		if start_button.draw():
+			question = 0
+			section = "quiz"
 
+
+		if exit_button.draw():
+			running = False
+
+	if(section == "quiz"):
+		
+		quiz_button    = Button(640,  25, 1240,200, 50, question_arr[question][0], (255,255,255), (30,160,200))
+		option1_button = Button(320, 250, 600, 200, 50, question_arr[question][1], (255,255,255), (200,30,10))
+		option2_button = Button(320, 500, 600, 200, 50, question_arr[question][2], (255,255,255), (30,200,10))
+		option3_button = Button(960, 250, 600, 200, 50, question_arr[question][3], (255,255,255), (50,10,240))
+		option4_button = Button(960, 500, 600, 200, 50, question_arr[question][4], (255,255,255), (190,170,20))
+		quiz_button.draw()
+		option1_button.draw()
+		option2_button.draw()
+		option3_button.draw()
+		option4_button.draw()
+	
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			running = False
