@@ -21,13 +21,7 @@ class QuestionAnswer:
 		random.shuffle(self.array)
 
 	def shuffled_answers(self):
-		return ([self.question] + self.array)
-
-	def check_answer(self, answer):
-		if(answer == self.correct_answer):
-			return True
-		else:
-			return False
+		return ([self.question] + self.array + [self.correct_answer])
 
 class Button():
 	def __init__(self, x, y, x_size, y_size, size, text, color_text, color_bg):
@@ -40,24 +34,26 @@ class Button():
 		self.x_size = x_size
 		self.y_size = y_size
 		self.size = size
-		self.clicked = False
+		self.clicked_last_frame = False
 		self.bg_rect = pygame.Rect(self.x - self.x_size/2, self.y, self.x_size, self.y_size)
+
+	def change_text(self, text):
+		self.lines = text.split('\n')
 
 	def draw(self):
 		action = False
 		i = 0
 		pos = pygame.mouse.get_pos()
 
-		pygame.draw.rect(screen, self.bg_color, self.bg_rect)
-
 		if self.bg_rect.collidepoint(pos):
-			if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
-				self.clicked = True
+			if pygame.mouse.get_pressed()[0] == 1 and self.clicked_last_frame == False:
+				self.clicked_last_frame = True
 				action = True
 
 		if pygame.mouse.get_pressed()[0] == 0:
-			self.clicked = False
+			self.clicked_last_frame = False
 
+		pygame.draw.rect(screen, self.bg_color, self.bg_rect)
 
 		for line in self.lines:
 			self.text = self.font.render(line, False, self.text_color, self.bg_color)
@@ -78,6 +74,17 @@ question = 0
 
 question_arr = [question1.shuffled_answers()]
 
+option1_button = Button(320, 250, 600, 220, 50, question_arr[question][1], (255,255,255), (200,30,10))
+option2_button = Button(320, 480, 600, 220, 50, question_arr[question][2], (255,255,255), (30,200,10))
+option3_button = Button(960, 250, 600, 220, 50, question_arr[question][3], (255,255,255), (50,10,240))
+option4_button = Button(960, 480, 600, 220, 50, question_arr[question][4], (255,255,255), (190,170,20))
+
+points = 0
+
+points_button  = Button(640,   0,   50, 40, 25, str(points) + '/' + str(question), (255,255,255), (0,0,0))
+
+quiz_button    = Button(640,  40, 1240,200, 50, question_arr[question][0], (255,255,255), (30,160,200))
+
 section = "start"
 
 while running:
@@ -96,17 +103,33 @@ while running:
 			running = False
 
 	if(section == "quiz"):
+		points_button.change_text(str(points) + '/' + str(question))
+
+		quiz_button.change_text(question_arr[question][0])
+
+		option1_button.change_text(question_arr[question][1])
+		option2_button.change_text(question_arr[question][2])
+		option3_button.change_text(question_arr[question][3])
+		option4_button.change_text(question_arr[question][4])
 		
-		quiz_button    = Button(640,  25, 1240,200, 50, question_arr[question][0], (255,255,255), (30,160,200))
-		option1_button = Button(320, 250, 600, 200, 50, question_arr[question][1], (255,255,255), (200,30,10))
-		option2_button = Button(320, 500, 600, 200, 50, question_arr[question][2], (255,255,255), (30,200,10))
-		option3_button = Button(960, 250, 600, 200, 50, question_arr[question][3], (255,255,255), (50,10,240))
-		option4_button = Button(960, 500, 600, 200, 50, question_arr[question][4], (255,255,255), (190,170,20))
 		quiz_button.draw()
-		option1_button.draw()
-		option2_button.draw()
-		option3_button.draw()
-		option4_button.draw()
+		points_button.draw()
+
+		if(option1_button.draw()):
+			if(question_arr[question][1] == question_arr[question][5]):
+				print("Test 1")
+
+		if(option2_button.draw()):
+			if(question_arr[question][2] == question_arr[question][5]):
+				print("Test 2")
+
+		if(option3_button.draw()):
+			if(question_arr[question][3] == question_arr[question][5]):
+				print("Test 3")
+
+		if(option4_button.draw()):
+			if(question_arr[question][4] == question_arr[question][5]):
+				print("Test 4")
 	
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
