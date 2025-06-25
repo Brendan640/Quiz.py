@@ -69,15 +69,35 @@ class Button():
 start_button = Button(640, 300, 300, 100, 110, 'Play', (255,255,255), (0,0,0))
 exit_button =  Button(640, 500, 300, 100, 110, 'Quit', (255,255,255), (0,0,0))
 
-question1 = QuestionAnswer('\nWhen was the internet\nfirst created?', '\n\n1960s', '\n\n1950s', '\n\n1970s', '\n\n1980s')
-question2 = QuestionAnswer('\nWhat was the first internet\'s name?', '\n\nARPANET', '\n\nInter-Net', '\n\nProject INN', '\n\nUSANet')
-question3 = QuestionAnswer('\nIn which country was the first internet created in?', '\n\nUSA', '\n\nUSSR', '\n\nWest Germany', '\n\nUK')
-question4 = QuestionAnswer('\nWhat was the first computer virus punished by law?', '\n\nMorris Worm', '\n\nChristmas Tree EXEC', '\n\nBrain', '\n\nCreeper')
-question5 = QuestionAnswer('\nHow much damage did it cause?', '\n\n98 million $', '\n\n51 million $', '\n\n213 million $', '\n\n465 million $')
-question6 = QuestionAnswer('\nWhat is a computer worm?', '\nSoftware which replicates itself\nand spreads to other devices.', '\nSoftware which hides itself\nby replacing\napplication components.', '\nSoftware which corrupts data\non the disk.', '\nSoftware, which once launched,\ncannot be removed from\nthe computer.')
-question7 = QuestionAnswer('\nWhat is WannaCry?', '\n\nRansomware', '\n\nThe first ever Trojan Horse', '\n\nA trojan horse (not the first one)', '\nA bug in Windows 7 which\nallowed Remote Code Execution\n to be done.')
-question8 = QuestionAnswer('\nWhat is ransomware?', '\nSoftware which encrypts all files\n on a computer and\n\'takes ransom\' of them.', '\n\nWares which are to be ransomed.', '\nData stolen during a hack which\nthe user has to pay back for.', '\nA hacker group that created\nthe first ever virus\nwhich \'took ransom\'\n of people\'s computers.')
-question9 = QuestionAnswer('','','','','')
+question1 = QuestionAnswer('\n\nWhen was the internet first created?', '\n\n1960s', '\n\n1950s', '\n\n1970s', '\n\n1980s')
+
+question2 = QuestionAnswer('\n\nWhat was the first internet\'s name?', '\n\nARPANET', '\n\nInter-Net', '\n\nProject INN', '\n\nUSANet')
+
+question3 = QuestionAnswer('\n\nIn which country was the first internet created in?', '\n\nUSA', '\n\nUSSR', '\n\nWest Germany', '\n\nUK')
+
+question4 = QuestionAnswer('\n\nWhat was the first computer virus punished by law?', '\n\nMorris Worm', '\n\nChristmas Tree EXEC', '\n\nBrain', '\n\nCreeper')
+
+question5 = QuestionAnswer('\n\nHow much damage did it cause?', '\n\n98 million $', '\n\n51 million $', '\n\n213 million $', '\n\n465 million $')
+
+question6 = QuestionAnswer('\n\nWhat is a computer worm?', '\nSoftware which replicates itself\nand spreads to other devices.', '\nSoftware which hides itself\nby replacing\napplication components.', '\nSoftware which corrupts data\non the disk.', '\nSoftware, which once launched,\ncannot be removed from\nthe computer.')
+
+question7 = QuestionAnswer('\n\nWhat is WannaCry?', '\n\nRansomware', '\n\nThe first ever Trojan Horse.', '\n\nA trojan horse (not the first one).', '\nA bug in Windows 7 which\nallowed Remote Code Execution\n to be done.')
+
+question8 = QuestionAnswer('\n\nWhat is ransomware?', '\nSoftware which encrypts all files\n on a computer and\n\'takes ransom\' of them.', '\n\nWares which are to be ransomed.', '\nData stolen during a hack which\nthe user has to pay back for.', '\nA hacker group that created\nthe first ever virus\nwhich \'took ransom\'\n of people\'s computers.')
+
+question9 = QuestionAnswer('\n\nWhy is IoT so vulnerable?','\nThere is often no security\non the devices and data.','\n\nThere is no way to verify the user.','\nThe data cannot be encrypted,\naccording to law.','\nIoT devices have admin privilege\non the devices the connect to.')
+
+question10 = QuestionAnswer('\n\nWhat is a zombie computer?','\nA computer that is used by hackers\nto launch DDoS attacks.','\n\nA computer that\'s been bitten.','\nA forgotten computer\nconnected to a network\nwhich has admin privileges.','\nA usb stick-sized computer which\n\'eats\' the files from a computer,\nand transfers them to their storage.')
+
+question11 = QuestionAnswer('\n\nWhat is the deep web?','\nWebsites which are not indexed,\nand require passwords\nto get into.','\nWebsites which live in\na pineapple under the sea.','\nWebsites which require\ndeep web-searching to be found.','\nWebsites which are primarily\nused for criminal activities.')
+
+question12 = QuestionAnswer('\n\nWhat is the dark web?','\nWebsites which are held on Tor,\nand are usually\nassociated with crime.','\nWebsites where someone\nhas turned off the lights.','\nWebsites which are held on RAR,\nand are usually used for\ncriminal activities.','\nWebsites which are held on qBR,\nand are usually used for\nunlawful activities.')
+
+question13 = QuestionAnswer('\n\nWhy is cryptocurrency used on the dark web?','\nIt is harder to track than\nreal life currency.','\nSo that people don\'t have to\nexchange different currencies.','\n\nTo prevent fraud.','\nBecause of the speed\nof the transfers.')
+
+question14 = QuestionAnswer('\n\nWhat is a good way to protect yourself from getting hacked?','Use a different password for\neach account,\nDon\'t click on suspicious links,\nUse MFA.','\nShare all of your passwords\nand personal information online.','\n\nUse a couple passwords.','\nWhatever you\'re doing right now\nis fine enough, don\'t worry about it.')
+
+question15 = QuestionAnswer('\n\nHow do banks detect fraud?','\nThey use advanced AIs\nto detect suspicious behaviour.','\nThey hire a lot of people\nto look at every transaction.','\n\nThey do not.','\nFraud is easily detectable,\nmeaning that they can use\nsimple algorithms to detect it.')
 
 question = 0
 
@@ -113,7 +133,7 @@ while running:
 
 
 		if start_button.draw():
-			question_arr = [question1.shuffled_answers(),question2.shuffled_answers(),question3.shuffled_answers(),question4.shuffled_answers(),question5.shuffled_answers(),question6.shuffled_answers(),question7.shuffled_answers(),question8.shuffled_answers(),question1.shuffled_answers(),question1.shuffled_answers(),question1.shuffled_answers(),question1.shuffled_answers(),question1.shuffled_answers(),question1.shuffled_answers(),question1.shuffled_answers()]
+			question_arr = [question1.shuffled_answers(),question2.shuffled_answers(),question3.shuffled_answers(),question4.shuffled_answers(),question5.shuffled_answers(),question6.shuffled_answers(),question7.shuffled_answers(),question8.shuffled_answers(),question9.shuffled_answers(),question10.shuffled_answers(),question11.shuffled_answers(),question12.shuffled_answers(),question13.shuffled_answers(),question14.shuffled_answers(),question15.shuffled_answers()]
 			question = 0
 			points = 0
 			start_button_clicked = True
@@ -169,6 +189,7 @@ while running:
 		if(play_again_button.draw() and last_question_click == False):
 			question = 0
 			points = 0
+			question_arr = [question1.shuffled_answers(),question2.shuffled_answers(),question3.shuffled_answers(),question4.shuffled_answers(),question5.shuffled_answers(),question6.shuffled_answers(),question7.shuffled_answers(),question8.shuffled_answers(),question9.shuffled_answers(),question10.shuffled_answers(),question11.shuffled_answers(),question12.shuffled_answers(),question13.shuffled_answers(),question14.shuffled_answers(),question15.shuffled_answers()]
 			start_button_clicked = True
 			section = "quiz"
 
